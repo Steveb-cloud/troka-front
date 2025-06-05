@@ -1,0 +1,59 @@
+.sidebar-wrapper {
+  position: fixed;
+  top: 100px;
+  left: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.petalo {
+  background-color: #2196F3;
+  color: white;
+  padding: 12px;
+  border-radius: 0 8px 8px 0;
+  cursor: pointer;
+  font-size: 20px;
+  transition: background-color 0.3s;
+}
+
+.petalo:hover {
+  background-color: #1976D2;
+}
+
+.social-menu {
+  margin-top: 8px;
+  background-color: #333;
+  padding: 10px;
+  border-radius: 0 8px 8px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: dropdown 0.3s ease;
+}
+
+@keyframes dropdown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.icon {
+  font-size: 22px;
+  color: white;
+  text-decoration: none;
+  transition: transform 0.2s, background-color 0.3s;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+.icon:hover {
+  background-color: #4CAF50;
+  transform: scale(1.1);
+}
