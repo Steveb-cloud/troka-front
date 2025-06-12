@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import '../css/Login.css'; // Asegúrate que existe el archivo o quítalo si no lo necesitas
+import '../css/Login.css'; 
 
 const Login = () => {
     const [usuario, setUsuario] = useState('');
@@ -11,17 +11,16 @@ const Login = () => {
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        setError(''); // Limpia errores anteriores
+        setError(''); 
         try {
             const res = await axios.post('http://localhost:3000/login', {
                 usuario,
                 password,
             });
 
-            // Verifica si el backend devuelve el token correctamente
             if (res.data.token) {
                 localStorage.setItem('token', res.data.token);
-                navigate('/home'); // Redirige
+                navigate('/home'); 
             } else {
                 setError('Respuesta inválida del servidor');
             }
