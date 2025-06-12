@@ -1,27 +1,38 @@
-
-import React from "react";
-import "./index.css";
-
-import Header from "./components/Header";
-import Sidebar from "./components/Sidebar";
-import Categorias from "./components/Categorias";
-import Publicaciones from "./components/Publicaciones";
-import Chats from "./components/Chats";
-import Footer from "./components/Footer";
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import Login from './page/Login';
+import Home from './page/Home';
+import Perfil from './page/Perfil';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
-  return (
-    <div className="app-container">
-      <Header />
-      <div className="layout">
-        <Sidebar />
-        <Categorias />
-        <Publicaciones />
-        <Chats />
-      </div>
-      <Footer />
-    </div>
-  );
+    return (
+        <Router>
+            <Routes>
+                <Route path="/" element={<Navigate to="/login" />} />
+
+                <Route path="/login" element={<Login />} />
+
+                <Route
+                    path="/home"
+                    element={
+                        <ProtectedRoute>
+                            <Home />
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route
+                    path="/perfil"
+                    element={
+                        <ProtectedRoute>
+                            <Perfil />
+                        </ProtectedRoute>
+                    }
+                />
+            </Routes>
+        </Router>
+    );
 }
 
 export default App;
+
