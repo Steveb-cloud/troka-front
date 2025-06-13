@@ -70,3 +70,38 @@
 .publicaciones {
   width: 55%;
 }
+
+.barra-busqueda {
+  display: flex;
+  justify-content: center; /* Usa 'flex-start' si la quieres alineada a la izquierda */
+  align-items: center;
+  gap: 10px;
+  margin: 20px auto;
+  max-width: 600px;
+  width: 90%;
+}
+
+.barra-busqueda input[type="text"] {
+  flex: 1;
+  padding: 10px 14px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+}
+
+.barra-busqueda button {
+  padding: 10px 18px;
+  font-size: 1rem;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.barra-busqueda button:hover {
+  background-color: #388e3c;
+}
+

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../index.css";
 
 import Header from "../components/Header";
@@ -7,15 +7,26 @@ import Categorias from "../components/Categorias";
 import Publicaciones from "../components/Publicaciones";
 import Chats from "../components/Chats";
 import Footer from "../components/Footer";
+import Busqueda from "../components/Busqueda";
 
 function Home() {
+  const [categoriaSeleccionada, setCategoriaSeleccionada] = useState(null);
+  const [filtroBusqueda, setFiltroBusqueda] = useState("");
+
   return (
     <div className="app-container">
       <Header />
+      <div className="barra-busqueda ">
+        <Busqueda onBuscar={setFiltroBusqueda} /> 
+      </div>
       <div className="layout">
         <Sidebar />
-        <Categorias />
-        <Publicaciones />
+        
+        <Categorias onSeleccionarCategoria={setCategoriaSeleccionada} />
+        <Publicaciones
+          categoriaId={categoriaSeleccionada}
+          filtro={filtroBusqueda}
+        />
         <Chats />
       </div>
       <Footer />
