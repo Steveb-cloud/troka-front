@@ -3,6 +3,8 @@ import Login from './page/Login';
 import Home from './page/Home';
 import Perfil from './page/Perfil';
 import ProtectedRoute from './components/ProtectedRoute';
+import ChatsMensajes from './page/ChatsMensajes';
+import Registro from './page/Registro';
 
 function App() {
     return (
@@ -11,6 +13,8 @@ function App() {
                 <Route path="/" element={<Navigate to="/login" />} />
 
                 <Route path="/login" element={<Login />} />
+
+                <Route path="/registro" element={<Registro />} /> 
 
                 <Route
                     path="/home"
@@ -26,6 +30,25 @@ function App() {
                     element={
                         <ProtectedRoute>
                             <Perfil />
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route
+                    path="/perfil/:id"
+                    element={
+                    <ProtectedRoute>
+                     <Perfil />
+                    </ProtectedRoute>
+                    }
+                />
+
+
+                <Route
+                    path="/chat/:id_amigo"
+                    element={
+                        <ProtectedRoute>
+                            <ChatsMensajes/>
                         </ProtectedRoute>
                     }
                 />

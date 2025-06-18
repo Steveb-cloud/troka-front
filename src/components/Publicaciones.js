@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Publicaciones({ categoriaId, filtro }) {
   const [publicaciones, setPublicaciones] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const url = categoriaId
@@ -35,8 +37,13 @@ export default function Publicaciones({ categoriaId, filtro }) {
             <h3>{post.titulo}</h3>
             <p>{post.descripcion}</p>
             <div className="publicacion-footer">
-              <span><strong>Categoría:</strong> {post.categoria_id}</span>
-              <span><strong>Usuario:</strong> {post.id_usuario}</span>
+              <span><strong>Categoría:</strong> {post.nombre_categoria}</span>
+              <span>
+                <strong>Usuario:</strong>{' '}
+                <button onClick={() => navigate(`/perfil/${post.id_usuario}`)} className="btn-usuario-link">
+                  {post.nombre_usuario}
+                </button>
+              </span>
             </div>
           </div>
         ))
