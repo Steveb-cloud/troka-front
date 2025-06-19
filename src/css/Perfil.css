@@ -1,0 +1,98 @@
+.perfil-layout {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+/* Columna izquierda - Mi Perfil */
+.perfil-izquierda {
+  flex: 1;
+  background: #f9f9f9;
+  padding: 1rem;
+  border-radius: 10px;
+  max-width: 250px;
+}
+
+/* Centro - Publicaciones */
+.perfil-centro {
+  flex: 2;
+  background: #fff;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.publicacion-card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  background-color: #fdfdfd;
+}
+
+/* Columna derecha - Chats */
+.perfil-derecha {
+  flex: 1;
+  background: #f1f1f1;
+  padding: 1rem;
+  border-radius: 10px;
+  max-width: 250px;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* Contenedor de la lista de chats */
+.lista-chats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+/* Estilo individual de cada nombre de chat */
+.chat-nombre {
+  padding: 8px;
+  border-radius: 4px;
+  background-color: #fff;
+  border: 1px solid #aaa;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.2s;
+}
+
+.chat-nombre:hover {
+  background-color: #e6e6e6;
+}
+
+/* Estilo del formulario para crear publicaciones */
+.formulario-publicacion label {
+  display: block;
+  margin: 0.5rem 0;
+}
+
+.formulario-publicacion input,
+.formulario-publicacion textarea,
+.formulario-publicacion select {
+  width: 100%;
+  padding: 5px;
+  margin-top: 0.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.formulario-reputacion {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.formulario-reputacion label {
+  display: flex;
+  flex-direction: column;
+}
+
+.formulario-reputacion textarea {
+  resize: vertical;
+  min-height: 60px;
+}

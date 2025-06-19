@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import { List, ListItemButton, ListItemText, Paper, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import '../css/Chats.css';
 
 export default function Chats() {
   const [amigos, setAmigos] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Obtener usuario guardado en localStorage
     const usuarioStr = localStorage.getItem('usuario');
     if (!usuarioStr) {
-      // No hay usuario logueado, redirigir al login
       navigate('/login');
       return;
     }
@@ -20,9 +18,7 @@ export default function Chats() {
 
     fetch(`http://localhost:3000/amigos/${usuarioActual}`)
       .then(res => {
-        if (!res.ok) {
-          throw new Error('Error al obtener amigos');
-        }
+        if (!res.ok) throw new Error('Error al obtener amigos');
         return res.json();
       })
       .then(data => setAmigos(data))
@@ -34,19 +30,18 @@ export default function Chats() {
   };
 
   return (
-    <aside className="chats">
-      <h3 className="titulo">💬 Chats</h3>
-      <ul className="lista-chats">
+    <Paper elevation={3} sx={{ p: 2, minWidth: 250, mt: 2 }}>
+      <Typography variant="h6" gutterBottom>💬 Chats</Typography>
+      <List>
         {amigos.map(amigo => (
-          <li
+          <ListItemButton
             key={amigo.id_usuario}
             onClick={() => abrirChat(amigo.id_usuario)}
-            style={{ cursor: 'pointer' }}
           >
-            {amigo.nombre}
-          </li>
+            <ListItemText primary={amigo.nombre} />
+          </ListItemButton>
         ))}
-      </ul>
-    </aside>
+      </List>
+    </Paper>
   );
 }

@@ -1,35 +1,13 @@
+/* Categorias.css */
 .categorias {
-  background-color: #ffffff;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  margin-bottom: 20px;
-  max-width: 200px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: white;
+  height: 100%;       /* Llenar todo el alto asignado */
+  width: 100%;        /* Llenar todo el ancho */
+  padding: 16px;
+  box-sizing: border-box;  /* Incluye padding en el ancho/alto */
+  border-radius: 8px;
+  box-shadow: 0 0 6px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
 }
 
-.categorias .titulo {
-  font-size: 18px;
-  margin-bottom: 10px;
-  color: #333;
-  border-bottom: 2px solid #4CAF50;
-  padding-bottom: 5px;
-}
-
-.lista-categorias {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.lista-categorias li {
-  margin: 10px 0;
-  padding: 8px;
-  border-radius: 6px;
-  transition: background-color 0.3s;
-  cursor: pointer;
-}
-
-.lista-categorias li:hover {
-  background-color: #f0f0f0;
-}

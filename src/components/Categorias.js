@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import '../css/Categorias.css';
+import { List, ListItemButton, ListItemText, Paper, Typography } from '@mui/material';
 
 export default function Categorias({ onSeleccionarCategoria }) {
   const [categorias, setCategorias] = useState([]);
@@ -23,17 +23,18 @@ export default function Categorias({ onSeleccionarCategoria }) {
   }, []);
 
   return (
-    <aside className="categorias">
-      <h3 className="titulo">📂 Categorías</h3>
-      <ul className="lista-categorias">
-        <li onClick={() => onSeleccionarCategoria(null)}>📋 Todas</li>
+    <Paper elevation={3} sx={{ p: 2, minWidth: 250 }}>
+      <Typography variant="h6" gutterBottom>📂 Categorías</Typography>
+      <List>
+        <ListItemButton onClick={() => onSeleccionarCategoria(null)}>
+          <ListItemText primary="📋 Todas" />
+        </ListItemButton>
         {categorias.map((cat) => (
-          <li key={cat.id_categoria} onClick={() => onSeleccionarCategoria(cat.id_categoria)}>
-            {emojiPorCategoria[cat.nombre] || "📁"} {cat.nombre}
-          </li>
+          <ListItemButton key={cat.id_categoria} onClick={() => onSeleccionarCategoria(cat.id_categoria)}>
+            <ListItemText primary={`${emojiPorCategoria[cat.nombre] || "📁"} ${cat.nombre}`} />
+          </ListItemButton>
         ))}
-      </ul>
-    </aside>
+      </List>
+    </Paper>
   );
 }
-

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../css/Header.css';
+import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
 
 export default function Header() {
   const navigate = useNavigate();
@@ -14,14 +14,23 @@ export default function Header() {
   };
 
   return (
-    <header className="app-header">
-      <h1>🌱 Troka</h1>
-      <nav>
-        <button className="btn-ingresar" onClick={() => navigate('/perfil')}>
-          Perfil {nombreUsuario ? `(${nombreUsuario})` : ''}
-        </button>
-        <button onClick={handleLogout}>Cerrar sesión</button>
-      </nav>
-    </header>
+    <AppBar position="static" color="success">
+      <Toolbar>
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1, cursor: 'pointer' }} onClick={() => navigate('/home')}>
+          🌱 Troka
+        </Typography>
+        <Box>
+          <Button color="inherit" onClick={() => navigate('/perfil')}>
+            Perfil {nombreUsuario ? `(${nombreUsuario})` : ''}
+          </Button>
+          <Button color="inherit" onClick={() => navigate('/trueques-pendientes')}>
+            Propuestas de Trueque
+          </Button>
+          <Button color="inherit" onClick={handleLogout}>
+            Cerrar sesión
+          </Button>
+        </Box>
+      </Toolbar>
+    </AppBar>
   );
 }

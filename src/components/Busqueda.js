@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "../index.css";
+import { TextField, Button, Stack } from '@mui/material';
 
 function Busqueda({ onBuscar }) {
   const [query, setQuery] = useState('');
@@ -9,18 +9,19 @@ function Busqueda({ onBuscar }) {
   };
 
   return (
-    <div style={{ marginBottom: '20px' }}>
-      <input
-        type="text"
-        placeholder="Buscar publicaciones..."
+    <Stack direction="row" spacing={2} alignItems="center" sx={{ mb: 3 }}>
+      <TextField
+        label="Buscar publicaciones..."
+        variant="outlined"
+        size="small"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        style={{ padding: '8px', width: '250px', borderRadius: '4px', border: '1px solid #ccc' }}
+        sx={{ width: 300 }}
       />
-      <button onClick={handleBuscar} style={{ marginLeft: '10px', padding: '8px 12px' }}>
+      <Button variant="contained" color="success" onClick={handleBuscar}>
         Buscar
-      </button>
-    </div>
+      </Button>
+    </Stack>
   );
 }
 

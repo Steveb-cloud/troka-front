@@ -5,6 +5,7 @@ import Perfil from './page/Perfil';
 import ProtectedRoute from './components/ProtectedRoute';
 import ChatsMensajes from './page/ChatsMensajes';
 import Registro from './page/Registro';
+import TruequesPendientes from './page/TruequesPendientes';
 
 function App() {
     return (
@@ -52,6 +53,16 @@ function App() {
                         </ProtectedRoute>
                     }
                 />
+
+                <Route
+                    path="/trueques-pendientes"
+                    element={
+                        <ProtectedRoute>
+                           <TruequesPendientes />
+                        </ProtectedRoute>
+                    }
+                />
+
             </Routes>
         </Router>
     );
