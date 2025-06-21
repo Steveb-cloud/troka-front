@@ -11,8 +11,11 @@ import {
   Select,
   MenuItem,
   FormControl,
-  InputLabel
+  InputLabel,
+  Paper,
+  Divider
 } from '@mui/material';
+import { Home as HomeIcon, Add as AddIcon } from '@mui/icons-material';
 
 function Perfil() {
   const [usuario, setUsuario] = useState(null);
@@ -212,32 +215,66 @@ function Perfil() {
     }
   };
 
-  if (!usuario) return <p>Cargando perfil...</p>;
+  if (!usuario) {
+    return (
+      <Box sx={{ p: 5 }}>
+        <Typography variant="h6" align="center">Cargando perfil...</Typography>
+      </Box>
+    );
+  }
 
   return (
-    <Box sx={{ backgroundColor: '#e8f5e9', minHeight: '100vh', p: 2 }}>
-      <Grid container spacing={2}>
+    <Box sx={{ backgroundColor: '#f1f8f4', minHeight: '100vh', p: 3 }}>
+      <Grid container spacing={3}>
+        {/* Panel izquierdo */}
         <Grid item xs={12} md={3}>
-          <Box sx={{ backgroundColor: 'white', p: 2, borderRadius: 2, boxShadow: 2 }}>
-            <Button fullWidth variant="outlined" onClick={() => navigate('/home')}>🏠 Volver al Home</Button>
-            <Typography variant="h6" sx={{ mt: 2 }}>{esMiPerfil ? 'Mi Perfil' : `Perfil de ${usuario.nombre}`}</Typography>
-            <Typography><strong>Nombre:</strong> {usuario.nombre}</Typography>
-            <Typography><strong>Email:</strong> {usuario.email}</Typography>
-            <Typography><strong>Ubicación:</strong> {usuario.ubicacion}</Typography>
+          <Paper elevation={3} sx={{ p: 3, borderRadius: 3 }}>
+            <Button
+              fullWidth
+              variant="outlined"
+              startIcon={<HomeIcon />}
+              onClick={() => navigate('/home')}
+              sx={{ mb: 2 }}
+            >
+              Volver al Home
+            </Button>
+            <Typography variant="h5" gutterBottom>
+              {esMiPerfil ? 'Mi Perfil' : `Perfil de ${usuario?.nombre}`}
+            </Typography>
+            <Divider sx={{ mb: 2 }} />
+            <Typography><strong>Nombre:</strong> {usuario?.nombre}</Typography>
+            <Typography><strong>Email:</strong> {usuario?.email}</Typography>
+            <Typography><strong>Ubicación:</strong> {usuario?.ubicacion}</Typography>
+
             {!esMiPerfil && !esAmigo && (
-              <Button variant="contained" sx={{ mt: 2, backgroundColor: '#4CAF50' }} onClick={agregarAmigo}>
+              <Button
+                variant="contained"
+                color="success"
+                fullWidth
+                sx={{ mt: 3 }}
+                onClick={agregarAmigo}
+              >
                 Agregar como amigo
               </Button>
             )}
+
             {esMiPerfil && (
               <>
-                <Button variant="contained" fullWidth sx={{ mt: 2, backgroundColor: '#4CAF50' }} onClick={() => setMostrarFormulario(!mostrarFormulario)}>
+                <Button
+                  variant="contained"
+                  fullWidth
+                  color="success"
+                  startIcon={<AddIcon />}
+                  sx={{ mt: 3 }}
+                  onClick={() => setMostrarFormulario(!mostrarFormulario)}
+                >
                   {mostrarFormulario ? 'Cancelar' : 'Crear Publicación'}
                 </Button>
+
                 {mostrarFormulario && (
                   <Box component="form" onSubmit={crearPublicacion} sx={{ mt: 2 }}>
-                    <TextField label="Título" fullWidth value={titulo} onChange={(e) => setTitulo(e.target.value)} required sx={{ mb: 2 }} />
-                    <TextField label="Descripción" fullWidth multiline rows={3} value={descripcion} onChange={(e) => setDescripcion(e.target.value)} required sx={{ mb: 2 }} />
+                    <TextField label="Título" fullWidth required value={titulo} onChange={(e) => setTitulo(e.target.value)} sx={{ mb: 2 }} />
+                    <TextField label="Descripción" fullWidth multiline rows={3} required value={descripcion} onChange={(e) => setDescripcion(e.target.value)} sx={{ mb: 2 }} />
                     <FormControl fullWidth sx={{ mb: 2 }}>
                       <InputLabel>Categoría</InputLabel>
                       <Select value={categoriaId} onChange={(e) => setCategoriaId(e.target.value)} required>
@@ -247,83 +284,98 @@ function Perfil() {
                         ))}
                       </Select>
                     </FormControl>
-                    <Button type="submit" variant="contained" fullWidth sx={{ backgroundColor: '#4CAF50' }}>Publicar</Button>
+                    <Button type="submit" fullWidth variant="contained" color="success">Publicar</Button>
                   </Box>
                 )}
               </>
             )}
-          </Box>
+          </Paper>
         </Grid>
 
+        {/* Publicaciones */}
         <Grid item xs={12} md={6}>
-          <Box sx={{ backgroundColor: 'white', p: 2, borderRadius: 2, boxShadow: 2 }}>
-            <Typography variant="h6">Publicaciones</Typography>
+          <Paper elevation={3} sx={{ p: 3, borderRadius: 3 }}>
+            <Typography variant="h6" gutterBottom>Publicaciones</Typography>
+            <Divider sx={{ mb: 2 }} />
             {publicaciones.length === 0 ? (
-              <Typography>No tienes publicaciones aún.</Typography>
+              <Typography>No hay publicaciones aún.</Typography>
             ) : (
               publicaciones.map((pub) => (
-                <Box key={pub.id_publicacion} sx={{ border: '1px solid #ccc', p: 2, mt: 2, borderRadius: 2 }}>
+                <Paper key={pub.id_publicacion} sx={{ p: 2, mb: 2, backgroundColor: '#f9fbe7' }}>
                   <Typography variant="subtitle1">{pub.titulo}</Typography>
-                  <Typography>{pub.descripcion}</Typography>
-                  <Typography variant="caption">Categoría: {pub.nombre_categoria}</Typography>
-                </Box>
+                  <Typography variant="body2">{pub.descripcion}</Typography>
+                  <Typography variant="caption" color="text.secondary">Categoría: {pub.nombre_categoria}</Typography>
+                </Paper>
               ))
             )}
-          </Box>
+          </Paper>
         </Grid>
 
+        {/* Reputaciones */}
         <Grid item xs={12} md={3}>
-          <Box sx={{ backgroundColor: 'white', p: 2, borderRadius: 2, boxShadow: 2 }}>
+          <Paper elevation={3} sx={{ p: 3, borderRadius: 3 }}>
             {esMiPerfil ? (
               <>
                 <Typography variant="h6">Mis Reputaciones</Typography>
+                <Divider sx={{ mb: 2 }} />
                 {reputaciones.length === 0 ? (
                   <Typography>No tienes opiniones aún.</Typography>
                 ) : (
                   reputaciones.map((rep, idx) => (
-                    <Box key={idx} sx={{ border: '1px solid #ccc', p: 1, my: 1, borderRadius: 2 }}>
-                      <Typography><strong>{rep.puntuacion} estrellas</strong></Typography>
-                      <Typography>{rep.comentario}</Typography>
-                    </Box>
+                    <Paper key={idx} sx={{ p: 1.5, my: 1, backgroundColor: '#e8f5e9' }}>
+                      <Typography variant="body1"><strong>{rep.puntuacion} estrellas</strong></Typography>
+                      <Typography variant="body2">{rep.comentario}</Typography>
+                    </Paper>
                   ))
                 )}
               </>
             ) : esAmigo ? (
               <>
                 <Typography variant="h6">Califica a {usuario.nombre}</Typography>
+                <Divider sx={{ mb: 2 }} />
                 <Box component="form" onSubmit={enviarValoracion}>
                   <FormControl fullWidth sx={{ mb: 2 }}>
                     <InputLabel>Puntuación</InputLabel>
                     <Select value={puntuacionNueva} onChange={(e) => setPuntuacionNueva(Number(e.target.value))} required>
-                      {[1, 2, 3, 4, 5].map((n) => (
+                      {[1, 2, 3, 4, 5].map(n => (
                         <MenuItem key={n} value={n}>{n}</MenuItem>
                       ))}
                     </Select>
                   </FormControl>
-                  <TextField label="Comentario" fullWidth multiline rows={3} value={comentarioNuevo} onChange={(e) => setComentarioNuevo(e.target.value)} required sx={{ mb: 2 }} />
-                  <Button type="submit" variant="contained" fullWidth sx={{ backgroundColor: '#4CAF50' }}>Enviar valoración</Button>
+                  <TextField
+                    label="Comentario"
+                    fullWidth
+                    multiline
+                    rows={3}
+                    required
+                    value={comentarioNuevo}
+                    onChange={(e) => setComentarioNuevo(e.target.value)}
+                    sx={{ mb: 2 }}
+                  />
+                  <Button type="submit" variant="contained" fullWidth color="success">Enviar valoración</Button>
                 </Box>
                 {reputaciones.length > 0 && (
                   <>
-                    <Typography variant="h6" sx={{ mt: 2 }}>Opiniones</Typography>
+                    <Typography variant="h6" sx={{ mt: 3 }}>Opiniones</Typography>
+                    <Divider sx={{ mb: 2 }} />
                     {reputaciones.map((rep, idx) => (
-                      <Box key={idx} sx={{ border: '1px solid #ccc', p: 1, my: 1, borderRadius: 2 }}>
-                        <Typography><strong>{rep.puntuacion} estrellas</strong></Typography>
-                        <Typography>{rep.comentario}</Typography>
-                      </Box>
+                      <Paper key={idx} sx={{ p: 1.5, my: 1, backgroundColor: '#e0f2f1' }}>
+                        <Typography variant="body1"><strong>{rep.puntuacion} estrellas</strong></Typography>
+                        <Typography variant="body2">{rep.comentario}</Typography>
+                      </Paper>
                     ))}
                   </>
                 )}
               </>
-            ) : !esAmigo && !esMiPerfil ? (
+            ) : (
               <Typography>Debes ser amigo para dejar una valoración.</Typography>
-            ) : null}
-          </Box>
+            )}
+          </Paper>
         </Grid>
       </Grid>
 
-      {(esMiPerfil || esAmigo) && (
-        <Box sx={{ mt: 4 }}>
+      {esMiPerfil && (
+        <Box sx={{ mt: 5 }}>
           <Chats />
         </Box>
       )}
